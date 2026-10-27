@@ -179,41 +179,4 @@ Create a `Client` with your API key, build a `RecaptchaV2Request` with the page 
 Use `TurnstileProxylessRequest` or `TurnstileRequest` from the table above. According to the [Turnstile documentation](https://docs.capmonster.cloud/docs/captchas/turnstile-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme), all Turnstile subtypes are supported automatically: manual, non-interactive and invisible.
 
 **Which captcha types does the PHP SDK solve?**
-See the table above. You can also browse the [Supported Captchas Overview](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) for all task types of the service.
-
-**How do I get an API key?**
-Register on CapMonster Cloud, top up your balance and copy your personal API key. The [Getting Started Guide](https://docs.capmonster.cloud/docs/getting-start/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) describes each step.
-
-**What does the `solve` method return?**
-A result with two fields: a boolean `result` (request success indicator) and a `message` that holds either a text description of the error or the object of a successful server response.
-
-**How fast are captchas solved?**
-On average between 1 and 30 seconds, depending on the captcha type. More details are in the [CapMonster Cloud FAQ](https://docs.capmonster.cloud/docs/faq/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
-
-**How long is a reCAPTCHA v2 solution valid?**
-According to the [reCAPTCHA v2 documentation](https://docs.capmonster.cloud/docs/captchas/no-captcha-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme), the returned token is valid for 60 seconds after the captcha is solved, so use it right away.
-
-**Where is the full API reference?**
-See the [API Methods Reference](https://docs.capmonster.cloud/docs/api/methods/create-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
-
----
-
-## Responsible Use
-
-CapMonster Cloud is intended for legitimate business purposes only, such as testing your own website or a website you are authorized to test, and recognizing images you provide. Read more about [ethical and transparent captcha automation](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
-
----
-
-## Documentation & Links
-
-- [Getting Started Guide](https://docs.capmonster.cloud/docs/getting-start/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme)
-- [Supported Captchas Overview](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme)
-- [API Methods Reference](https://docs.capmonster.cloud/docs/api/methods/create-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme)
-- [CapMonster Cloud FAQ](https://docs.capmonster.cloud/docs/faq/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme)
-- [CapMonster Cloud website](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme)
-
----
-
-## License
-
-Released under the [MIT License](./LICENSE).
+See the table above. You can also browse the [Supported Captchas Overview](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) for all task types of the service
