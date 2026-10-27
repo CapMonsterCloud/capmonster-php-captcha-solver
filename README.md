@@ -101,7 +101,7 @@ $client = new CapMonsterClient(new ClientOptions('your_client_key'));
 echo $client->getBalance(), PHP_EOL;
 
 // solve image captcha
-$imageResult = $client->solve(new ImageToTextRequest('base64_captcha_image'));
+$imageResult = $client->solve(ImageToTextRequest::fromFile('captcha.png'));
 echo $imageResult['text'], PHP_EOL;
 
 // solve reCAPTCHA v2 (without proxy)
