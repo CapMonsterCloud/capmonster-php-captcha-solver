@@ -1,5 +1,5 @@
 {
-    "name": "zennolab/capmonstercloud.client",
+    "name": "capmonstercloud/capmonster-client",
     "description": "PHP client for the CapMonster Cloud captcha-solving API",
     "type": "library",
     "license": "MIT",
@@ -19,12 +19,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Zennolab\\CapMonsterCloud\\": "src/"
+            "CapMonsterCloud\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Zennolab\\CapMonsterCloud\\Tests\\": "tests/"
+            "CapMonsterCloud\\Tests\\": "tests/"
         }
     },
     "scripts": {

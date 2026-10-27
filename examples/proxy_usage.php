@@ -4,11 +4,11 @@
 // The proxy is passed to CapMonster Cloud and used by the solver; use the same proxy in your own session.
 require __DIR__ . '/../vendor/autoload.php';
 
-use Zennolab\CapMonsterCloud\CapMonsterClient;
-use Zennolab\CapMonsterCloud\ClientOptions;
-use Zennolab\CapMonsterCloud\ProxyInfo;
-use Zennolab\CapMonsterCloud\ProxyType;
-use Zennolab\CapMonsterCloud\Requests\RecaptchaV2Request;
+use CapMonsterCloud\CapMonsterClient;
+use CapMonsterCloud\ClientOptions;
+use CapMonsterCloud\ProxyInfo;
+use CapMonsterCloud\ProxyType;
+use CapMonsterCloud\Requests\RecaptchaV2Request;
 
 $client = new CapMonsterClient(new ClientOptions(getenv('CAPMONSTER_API_KEY') ?: 'YOUR_API_KEY'));
 

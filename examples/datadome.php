@@ -3,11 +3,11 @@
 // Usage: CAPMONSTER_API_KEY=... php examples/datadome.php
 require __DIR__ . '/../vendor/autoload.php';
 
-use Zennolab\CapMonsterCloud\CapMonsterClient;
-use Zennolab\CapMonsterCloud\ClientOptions;
-use Zennolab\CapMonsterCloud\ProxyInfo;
-use Zennolab\CapMonsterCloud\ProxyType;
-use Zennolab\CapMonsterCloud\Requests\DataDomeCustomTaskRequest;
+use CapMonsterCloud\CapMonsterClient;
+use CapMonsterCloud\ClientOptions;
+use CapMonsterCloud\ProxyInfo;
+use CapMonsterCloud\ProxyType;
+use CapMonsterCloud\Requests\DataDomeCustomTaskRequest;
 
 $client = new CapMonsterClient(new ClientOptions(getenv('CAPMONSTER_API_KEY') ?: 'YOUR_API_KEY'));
 

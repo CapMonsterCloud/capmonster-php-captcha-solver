@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Exception;
+namespace CapMonsterCloud\Exception;
 
 /** The solution did not arrive within the maximum waiting time of the task type. */
 class TimeoutException extends CapMonsterException

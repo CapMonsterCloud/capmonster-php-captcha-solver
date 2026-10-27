@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Requests;
+namespace CapMonsterCloud\Requests;
 
-use Zennolab\CapMonsterCloud\GetResultTimeouts;
-use Zennolab\CapMonsterCloud\ProxyInfo;
+use CapMonsterCloud\GetResultTimeouts;
+use CapMonsterCloud\ProxyInfo;
 
 /** Imperva / Incapsula (`CustomTask`, class `Imperva`). Your own proxy is required. */
 final class ImpervaCustomTaskRequest extends AbstractRequest

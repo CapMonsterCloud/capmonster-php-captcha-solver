@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Requests;
+namespace CapMonsterCloud\Requests;
 
-use Zennolab\CapMonsterCloud\Exception\ValidationException;
-use Zennolab\CapMonsterCloud\GetResultTimeouts;
+use CapMonsterCloud\Exception\ValidationException;
+use CapMonsterCloud\GetResultTimeouts;
 
 /**
  * reCAPTCHA v2 image click task (`ComplexImageTask`, class `recaptcha`). No proxy is needed.

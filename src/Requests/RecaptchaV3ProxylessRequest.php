@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Requests;
+namespace CapMonsterCloud\Requests;
 
-use Zennolab\CapMonsterCloud\Exception\ValidationException;
-use Zennolab\CapMonsterCloud\GetResultTimeouts;
+use CapMonsterCloud\Exception\ValidationException;
+use CapMonsterCloud\GetResultTimeouts;
 
 /** reCAPTCHA v3 (`RecaptchaV3TaskProxyless`). Proxies are not supported. */
 final class RecaptchaV3ProxylessRequest extends AbstractRequest

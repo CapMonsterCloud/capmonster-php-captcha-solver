@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Exception;
+namespace CapMonsterCloud\Exception;
 
 /** The API answered with an unexpected HTTP status code and no error JSON. */
 class UnexpectedHttpStatusException extends CapMonsterException

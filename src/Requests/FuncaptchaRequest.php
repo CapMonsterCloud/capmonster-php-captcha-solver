@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Requests;
+namespace CapMonsterCloud\Requests;
 
-use Zennolab\CapMonsterCloud\GetResultTimeouts;
-use Zennolab\CapMonsterCloud\ProxyInfo;
+use CapMonsterCloud\GetResultTimeouts;
+use CapMonsterCloud\ProxyInfo;
 
 /**
  * FunCaptcha / Arkose Labs (`FunCaptchaTask`).

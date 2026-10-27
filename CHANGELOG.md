@@ -6,10 +6,16 @@ All notable changes to this package are documented here. The format follows
 ## [2.0.0]
 
 Full rewrite. **Breaking:** the 1.x API (`Client`, `*Request` classes in the global namespace,
-`Result{result, message}`) is removed; see "Migrating from 1.x" in README.md.
+`Result{result, message}`) is removed. To migrate: `require 'vendor/autoload.php'` instead of `include './client/...'`,
+`new CapMonsterClient(new ClientOptions($key))` instead of `new Client($key)`, request classes from
+`CapMonsterCloud\Requests\` (a `proxy:` argument instead of separate `*Proxyless` classes), and `solve()` returns
+the solution array and throws `CapMonsterException` instead of returning `Result{result, message}`.
+
+**Renamed:** the Composer package is now `capmonstercloud/capmonster-client` (was `zennolab/capmonstercloud.client`,
+which stays at 1.x) and the namespace is `CapMonsterCloud\`. Install with `composer require capmonstercloud/capmonster-client`.
 
 ### Added
-- Composer package with PSR-4 autoloading (`Zennolab\CapMonsterCloud\`): works from `vendor/` in any project
+- Composer package with PSR-4 autoloading (`CapMonsterCloud\`): works from `vendor/` in any project
   (fixes #12 "Not compatible using composer"). Requires PHP 8.1+, `ext-curl`, `ext-json`; no runtime dependencies.
 - `CapMonsterClient`: `solve()` (createTask + polling with a per-type schedule), low-level `createTask()` /
   `getTaskResult()`, `getBalance()`. Errors are exceptions under `CapMonsterException`

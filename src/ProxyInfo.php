@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud;
+namespace CapMonsterCloud;
 
-use Zennolab\CapMonsterCloud\Exception\ValidationException;
+use CapMonsterCloud\Exception\ValidationException;
 
 /**
  * Proxy used by CapMonster workers to open the captcha page.

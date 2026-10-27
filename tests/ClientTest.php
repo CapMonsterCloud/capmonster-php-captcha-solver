@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Tests;
+namespace CapMonsterCloud\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Zennolab\CapMonsterCloud\CapMonsterClient;
-use Zennolab\CapMonsterCloud\ClientOptions;
-use Zennolab\CapMonsterCloud\Exception\CapMonsterException;
-use Zennolab\CapMonsterCloud\Exception\CreateTaskException;
-use Zennolab\CapMonsterCloud\Exception\GetBalanceException;
-use Zennolab\CapMonsterCloud\Exception\GetResultException;
-use Zennolab\CapMonsterCloud\Exception\MalformedResponseException;
-use Zennolab\CapMonsterCloud\Exception\TimeoutException;
-use Zennolab\CapMonsterCloud\Exception\TransportException;
-use Zennolab\CapMonsterCloud\Exception\UnexpectedHttpStatusException;
-use Zennolab\CapMonsterCloud\Exception\ValidationException;
-use Zennolab\CapMonsterCloud\GetResultTimeouts;
-use Zennolab\CapMonsterCloud\Http\HttpResponse;
-use Zennolab\CapMonsterCloud\Requests\RecaptchaV2Request;
+use CapMonsterCloud\CapMonsterClient;
+use CapMonsterCloud\ClientOptions;
+use CapMonsterCloud\Exception\CapMonsterException;
+use CapMonsterCloud\Exception\CreateTaskException;
+use CapMonsterCloud\Exception\GetBalanceException;
+use CapMonsterCloud\Exception\GetResultException;
+use CapMonsterCloud\Exception\MalformedResponseException;
+use CapMonsterCloud\Exception\TimeoutException;
+use CapMonsterCloud\Exception\TransportException;
+use CapMonsterCloud\Exception\UnexpectedHttpStatusException;
+use CapMonsterCloud\Exception\ValidationException;
+use CapMonsterCloud\GetResultTimeouts;
+use CapMonsterCloud\Http\HttpResponse;
+use CapMonsterCloud\Requests\RecaptchaV2Request;
 
 final class ClientTest extends TestCase
 {
@@ -187,7 +187,7 @@ final class ClientTest extends TestCase
 
         // ImageToText: first poll after 0.35 s
         $started = microtime(true);
-        self::assertSame(['text' => 'abc'], $client->solve(new \Zennolab\CapMonsterCloud\Requests\ImageToTextRequest('QUJD')));
+        self::assertSame(['text' => 'abc'], $client->solve(new \CapMonsterCloud\Requests\ImageToTextRequest('QUJD')));
         self::assertGreaterThanOrEqual(0.3, microtime(true) - $started);
         self::assertSame('https://api.capmonster.cloud/createTask', $this->api->requests[0]['url']);
     }

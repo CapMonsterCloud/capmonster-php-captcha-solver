@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Requests;
+namespace CapMonsterCloud\Requests;
 
 /**
  * Recognition modules of `ImageToTextTask` (`capMonsterModule`), as listed in

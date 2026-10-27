@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Requests;
+namespace CapMonsterCloud\Requests;
 
-use Zennolab\CapMonsterCloud\GetResultTimeouts;
+use CapMonsterCloud\GetResultTimeouts;
 
 /**
  * Recognition modules of `ComplexImageTask` (class `recognition`), no proxy needed.

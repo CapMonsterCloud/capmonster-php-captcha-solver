@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud;
+namespace CapMonsterCloud;
 
 /** Client settings. Use named arguments to change only what you need. */
 final class ClientOptions

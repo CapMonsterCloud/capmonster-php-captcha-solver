@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud;
+namespace CapMonsterCloud;
 
-use Zennolab\CapMonsterCloud\Exception\ValidationException;
+use CapMonsterCloud\Exception\ValidationException;
 
 /** Proxy through which the SDK itself sends its HTTP requests to the CapMonster Cloud API. */
 final class ClientProxy

@@ -76,7 +76,7 @@ Looking for a 2captcha alternative or a capsolver alternative for PHP web scrapi
 Install the package with [Composer](https://getcomposer.org/). PHP 8.1 or newer with the `curl` and `json` extensions is required.
 
 ```bash
-composer require zennolab/capmonstercloud.client
+composer require capmonstercloud/capmonster-client
 ```
 
 Then load Composer's autoloader with `require 'vendor/autoload.php';` as shown below.
@@ -89,11 +89,11 @@ Then load Composer's autoloader with `require 'vendor/autoload.php';` as shown b
 <?php
 require 'vendor/autoload.php';
 
-use Zennolab\CapMonsterCloud\CapMonsterClient;
-use Zennolab\CapMonsterCloud\ClientOptions;
-use Zennolab\CapMonsterCloud\Requests\ImageToTextRequest;
-use Zennolab\CapMonsterCloud\Requests\RecaptchaV2Request;
-use Zennolab\CapMonsterCloud\Requests\TurnstileRequest;
+use CapMonsterCloud\CapMonsterClient;
+use CapMonsterCloud\ClientOptions;
+use CapMonsterCloud\Requests\ImageToTextRequest;
+use CapMonsterCloud\Requests\RecaptchaV2Request;
+use CapMonsterCloud\Requests\TurnstileRequest;
 
 $client = new CapMonsterClient(new ClientOptions('your_client_key'));
 
@@ -124,9 +124,9 @@ echo $turnstileResult['token'], PHP_EOL;
 `solve()` returns the `solution` object of the server response as an associative array, for example `['gRecaptchaResponse' => '...']` for reCAPTCHA or `['text' => '...']` for an image. If the task cannot be solved, `solve()` throws an exception:
 
 ```php
-use Zennolab\CapMonsterCloud\Exception\CapMonsterException;
-use Zennolab\CapMonsterCloud\Exception\GetResultException;
-use Zennolab\CapMonsterCloud\Exception\TimeoutException;
+use CapMonsterCloud\Exception\CapMonsterException;
+use CapMonsterCloud\Exception\GetResultException;
+use CapMonsterCloud\Exception\TimeoutException;
 
 try {
     $solution = $client->solve($request);
@@ -167,10 +167,10 @@ CapMonster Cloud uses the same `createTask` / `getTaskResult` flow, so if you ca
 <?php
 require 'vendor/autoload.php';
 
-use Zennolab\CapMonsterCloud\CapMonsterClient;
-use Zennolab\CapMonsterCloud\ClientOptions;
-use Zennolab\CapMonsterCloud\Exception\CapMonsterException;
-use Zennolab\CapMonsterCloud\Requests\RecaptchaV2Request;
+use CapMonsterCloud\CapMonsterClient;
+use CapMonsterCloud\ClientOptions;
+use CapMonsterCloud\Exception\CapMonsterException;
+use CapMonsterCloud\Requests\RecaptchaV2Request;
 
 $client = new CapMonsterClient(new ClientOptions('YOUR_CAPMONSTER_API_KEY'));
 

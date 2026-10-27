@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Exception;
+namespace CapMonsterCloud\Exception;
 
 /**
  * The API returned `errorId != 0`. `errorCode` is the stable identifier to branch on

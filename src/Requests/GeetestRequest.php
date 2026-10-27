@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Requests;
+namespace CapMonsterCloud\Requests;
 
-use Zennolab\CapMonsterCloud\GetResultTimeouts;
-use Zennolab\CapMonsterCloud\ProxyInfo;
+use CapMonsterCloud\GetResultTimeouts;
+use CapMonsterCloud\ProxyInfo;
 
 /**
  * GeeTest captcha (`GeeTestTask`), versions 3 and 4. Build it with {@see v3()} or {@see v4()}.

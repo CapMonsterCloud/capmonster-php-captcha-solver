@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Tests;
+namespace CapMonsterCloud\Tests;
 
-use Zennolab\CapMonsterCloud\Exception\TransportException;
-use Zennolab\CapMonsterCloud\Http\HttpResponse;
-use Zennolab\CapMonsterCloud\Http\HttpTransport;
+use CapMonsterCloud\Exception\TransportException;
+use CapMonsterCloud\Http\HttpResponse;
+use CapMonsterCloud\Http\HttpTransport;
 
 /** Replays canned responses per API method and records every request. */
 final class FakeTransport implements HttpTransport
