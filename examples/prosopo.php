@@ -3,9 +3,9 @@
 // Usage: CAPMONSTER_API_KEY=... php examples/prosopo.php
 require __DIR__ . '/../vendor/autoload.php';
 
-use Zennolab\CapMonsterCloud\CapMonsterClient;
-use Zennolab\CapMonsterCloud\ClientOptions;
-use Zennolab\CapMonsterCloud\Requests\ProsopoTaskRequest;
+use CapMonsterCloud\CapMonsterClient;
+use CapMonsterCloud\ClientOptions;
+use CapMonsterCloud\Requests\ProsopoTaskRequest;
 
 $client = new CapMonsterClient(new ClientOptions(getenv('CAPMONSTER_API_KEY') ?: 'YOUR_API_KEY'));
 

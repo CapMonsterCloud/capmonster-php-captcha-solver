@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Http;
+namespace CapMonsterCloud\Http;
 
-use Zennolab\CapMonsterCloud\ClientProxy;
-use Zennolab\CapMonsterCloud\Exception\TransportException;
-use Zennolab\CapMonsterCloud\ProxyType;
+use CapMonsterCloud\ClientProxy;
+use CapMonsterCloud\Exception\TransportException;
+use CapMonsterCloud\ProxyType;
 
 /** {@see HttpTransport} on top of ext-curl. One curl handle is reused, so keep-alive works across polls. */
 final class CurlTransport implements HttpTransport

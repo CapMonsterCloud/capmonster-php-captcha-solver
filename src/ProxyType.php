@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud;
+namespace CapMonsterCloud;
 
 /** Protocol of a proxy server. */
 enum ProxyType: string

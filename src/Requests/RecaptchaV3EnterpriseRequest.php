@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Requests;
+namespace CapMonsterCloud\Requests;
 
-use Zennolab\CapMonsterCloud\GetResultTimeouts;
+use CapMonsterCloud\GetResultTimeouts;
 
 /** reCAPTCHA v3 Enterprise (`RecaptchaV3EnterpriseTask`). Proxies are not supported. */
 final class RecaptchaV3EnterpriseRequest extends AbstractRequest

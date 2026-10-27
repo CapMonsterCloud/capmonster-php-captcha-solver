@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Http;
+namespace CapMonsterCloud\Http;
 
-use Zennolab\CapMonsterCloud\Exception\TransportException;
+use CapMonsterCloud\Exception\TransportException;
 
 /**
  * Sends one JSON POST request. The default implementation is {@see CurlTransport};

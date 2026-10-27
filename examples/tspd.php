@@ -3,11 +3,11 @@
 // Usage: CAPMONSTER_API_KEY=... php examples/tspd.php
 require __DIR__ . '/../vendor/autoload.php';
 
-use Zennolab\CapMonsterCloud\CapMonsterClient;
-use Zennolab\CapMonsterCloud\ClientOptions;
-use Zennolab\CapMonsterCloud\ProxyInfo;
-use Zennolab\CapMonsterCloud\ProxyType;
-use Zennolab\CapMonsterCloud\Requests\TspdCustomTaskRequest;
+use CapMonsterCloud\CapMonsterClient;
+use CapMonsterCloud\ClientOptions;
+use CapMonsterCloud\ProxyInfo;
+use CapMonsterCloud\ProxyType;
+use CapMonsterCloud\Requests\TspdCustomTaskRequest;
 
 $client = new CapMonsterClient(new ClientOptions(getenv('CAPMONSTER_API_KEY') ?: 'YOUR_API_KEY'));
 

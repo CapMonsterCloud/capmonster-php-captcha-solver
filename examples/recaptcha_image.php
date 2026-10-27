@@ -3,10 +3,10 @@
 // Usage: CAPMONSTER_API_KEY=... php examples/recaptcha_image.php
 require __DIR__ . '/../vendor/autoload.php';
 
-use Zennolab\CapMonsterCloud\CapMonsterClient;
-use Zennolab\CapMonsterCloud\ClientOptions;
-use Zennolab\CapMonsterCloud\Requests\RecaptchaComplexImageTaskRequest;
-use Zennolab\CapMonsterCloud\Requests\RecaptchaGrid;
+use CapMonsterCloud\CapMonsterClient;
+use CapMonsterCloud\ClientOptions;
+use CapMonsterCloud\Requests\RecaptchaComplexImageTaskRequest;
+use CapMonsterCloud\Requests\RecaptchaGrid;
 
 $client = new CapMonsterClient(new ClientOptions(getenv('CAPMONSTER_API_KEY') ?: 'YOUR_API_KEY'));
 

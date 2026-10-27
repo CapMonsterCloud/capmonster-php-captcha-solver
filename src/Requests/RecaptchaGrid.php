@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Requests;
+namespace CapMonsterCloud\Requests;
 
 /** Image grid of a reCAPTCHA click challenge (`metadata.Grid`). */
 enum RecaptchaGrid: string

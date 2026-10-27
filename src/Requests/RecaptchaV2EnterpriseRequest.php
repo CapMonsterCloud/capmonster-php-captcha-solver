@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Requests;
+namespace CapMonsterCloud\Requests;
 
-use Zennolab\CapMonsterCloud\Exception\ValidationException;
-use Zennolab\CapMonsterCloud\GetResultTimeouts;
-use Zennolab\CapMonsterCloud\ProxyInfo;
+use CapMonsterCloud\Exception\ValidationException;
+use CapMonsterCloud\GetResultTimeouts;
+use CapMonsterCloud\ProxyInfo;
 
 /**
  * reCAPTCHA v2 Enterprise (`RecaptchaV2EnterpriseTask`).

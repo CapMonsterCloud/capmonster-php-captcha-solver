@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud;
+namespace CapMonsterCloud;
 
 /** Polling schedule of `getTaskResult` for one task type. All values are in seconds. */
 final class GetResultTimeouts

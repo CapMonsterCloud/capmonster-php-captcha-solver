@@ -3,9 +3,9 @@
 // Usage: CAPMONSTER_API_KEY=... php examples/alibaba.php
 require __DIR__ . '/../vendor/autoload.php';
 
-use Zennolab\CapMonsterCloud\CapMonsterClient;
-use Zennolab\CapMonsterCloud\ClientOptions;
-use Zennolab\CapMonsterCloud\Requests\AlibabaCustomTaskRequest;
+use CapMonsterCloud\CapMonsterClient;
+use CapMonsterCloud\ClientOptions;
+use CapMonsterCloud\Requests\AlibabaCustomTaskRequest;
 
 $client = new CapMonsterClient(new ClientOptions(getenv('CAPMONSTER_API_KEY') ?: 'YOUR_API_KEY'));
 

@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Tests;
+namespace CapMonsterCloud\Tests;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Zennolab\CapMonsterCloud\Exception\ValidationException;
-use Zennolab\CapMonsterCloud\ProxyInfo;
-use Zennolab\CapMonsterCloud\ProxyType;
-use Zennolab\CapMonsterCloud\Requests;
-use Zennolab\CapMonsterCloud\Requests\CaptchaRequest;
-use Zennolab\CapMonsterCloud\Requests\RecaptchaGrid;
-use Zennolab\CapMonsterCloud\Requests\TextModule;
+use CapMonsterCloud\Exception\ValidationException;
+use CapMonsterCloud\ProxyInfo;
+use CapMonsterCloud\ProxyType;
+use CapMonsterCloud\Requests;
+use CapMonsterCloud\Requests\CaptchaRequest;
+use CapMonsterCloud\Requests\RecaptchaGrid;
+use CapMonsterCloud\Requests\TextModule;
 
 final class RequestsTest extends TestCase
 {
@@ -277,7 +277,7 @@ final class RequestsTest extends TestCase
 
     public function testSecretsAreMaskedInDumps(): void
     {
-        $dump = print_r(self::proxy(), true) . print_r(new \Zennolab\CapMonsterCloud\ClientOptions('SECRETKEY'), true);
+        $dump = print_r(self::proxy(), true) . print_r(new \CapMonsterCloud\ClientOptions('SECRETKEY'), true);
         self::assertStringNotContainsString('SECRETKEY', $dump);
         self::assertStringNotContainsString("[password] => p\n", $dump);
     }

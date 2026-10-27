@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud;
+namespace CapMonsterCloud;
 
-use Zennolab\CapMonsterCloud\Exception\CapMonsterException;
-use Zennolab\CapMonsterCloud\Exception\CreateTaskException;
-use Zennolab\CapMonsterCloud\Exception\GetBalanceException;
-use Zennolab\CapMonsterCloud\Exception\GetResultException;
-use Zennolab\CapMonsterCloud\Exception\MalformedResponseException;
-use Zennolab\CapMonsterCloud\Exception\TimeoutException;
-use Zennolab\CapMonsterCloud\Exception\UnexpectedHttpStatusException;
-use Zennolab\CapMonsterCloud\Http\CurlTransport;
-use Zennolab\CapMonsterCloud\Http\HttpTransport;
-use Zennolab\CapMonsterCloud\Requests\CaptchaRequest;
+use CapMonsterCloud\Exception\CapMonsterException;
+use CapMonsterCloud\Exception\CreateTaskException;
+use CapMonsterCloud\Exception\GetBalanceException;
+use CapMonsterCloud\Exception\GetResultException;
+use CapMonsterCloud\Exception\MalformedResponseException;
+use CapMonsterCloud\Exception\TimeoutException;
+use CapMonsterCloud\Exception\UnexpectedHttpStatusException;
+use CapMonsterCloud\Http\CurlTransport;
+use CapMonsterCloud\Http\HttpTransport;
+use CapMonsterCloud\Requests\CaptchaRequest;
 
 /** CapMonster Cloud client: createTask / getTaskResult / getBalance and the high-level {@see solve()}. */
 final class CapMonsterClient

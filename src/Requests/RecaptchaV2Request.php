@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Requests;
+namespace CapMonsterCloud\Requests;
 
-use Zennolab\CapMonsterCloud\GetResultTimeouts;
-use Zennolab\CapMonsterCloud\ProxyInfo;
+use CapMonsterCloud\GetResultTimeouts;
+use CapMonsterCloud\ProxyInfo;
 
 /** reCAPTCHA v2 (`RecaptchaV2Task`). Without a proxy the task is solved from CapMonster's own IPs. */
 final class RecaptchaV2Request extends AbstractRequest

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud\Http;
+namespace CapMonsterCloud\Http;
 
 final class HttpResponse
 {

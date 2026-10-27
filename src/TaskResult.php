@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zennolab\CapMonsterCloud;
+namespace CapMonsterCloud;
 
 /** State of a task returned by {@see CapMonsterClient::getTaskResult()}. */
 final class TaskResult

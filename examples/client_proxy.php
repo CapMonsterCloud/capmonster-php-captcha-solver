@@ -5,10 +5,10 @@
 // It is not sent to the solver: to solve through a proxy, see proxy_usage.php.
 require __DIR__ . '/../vendor/autoload.php';
 
-use Zennolab\CapMonsterCloud\CapMonsterClient;
-use Zennolab\CapMonsterCloud\ClientOptions;
-use Zennolab\CapMonsterCloud\ClientProxy;
-use Zennolab\CapMonsterCloud\ProxyType;
+use CapMonsterCloud\CapMonsterClient;
+use CapMonsterCloud\ClientOptions;
+use CapMonsterCloud\ClientProxy;
+use CapMonsterCloud\ProxyType;
 
 $client = new CapMonsterClient(new ClientOptions(
     getenv('CAPMONSTER_API_KEY') ?: 'YOUR_API_KEY',
