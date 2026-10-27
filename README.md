@@ -1,27 +1,42 @@
-# CapMonster Cloud PHP SDK: PHP Captcha Solver for reCAPTCHA, Cloudflare Turnstile & GeeTest
+# CapMonster Cloud PHP SDK: PHP Captcha Solver & Captcha Bypass for reCAPTCHA, Cloudflare Turnstile and GeeTest
 
 > **🔄 Migrating from 2Captcha or Capsolver?** CapMonster Cloud is a fast, cost-effective **2captcha alternative** and **capsolver alternative** for PHP: reCAPTCHA v3 from **$0.90 per 1,000 solves**, which is **up to 38% cheaper than 2Captcha** and **10% cheaper than Capsolver**, with an API response time of **≤ 2 s**. Already have software built for 2Captcha? CapMonster Cloud [supports the 2Captcha API format](https://docs.capmonster.cloud/docs/external-services/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme). Moving your PHP code takes just a few lines: see the **Migration examples** below. Full comparison and disclaimer are in the comparison section below.
 
 <p align="center">
   <a href="https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme">
-    <img src="https://img.shields.io/badge/CapMonster%20Cloud-PHP%20Captcha%20Solver-00B2FF?style=for-the-badge&logo=php&logoColor=white" alt="CapMonster Cloud PHP SDK - captcha solver for PHP" height="40">
+    <img src="https://img.shields.io/badge/CapMonster%20Cloud-PHP%20Captcha%20Solver-00B2FF?style=for-the-badge&logo=php&logoColor=white" alt="CapMonster Cloud PHP SDK - captcha solver and captcha bypass API client" height="40">
   </a>
 </p>
 
-PHP client library for the [CapMonster Cloud](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) captcha solving API. Use this PHP captcha solver for captcha bypass: bypass reCAPTCHA v2, reCAPTCHA v3, reCAPTCHA v2 Enterprise and Cloudflare Turnstile, solve GeeTest, reCAPTCHA image-click and text (image-to-text) captchas in web scraping, browser automation and backend scripts: send a request class to the `solve` method and get a ready solution. As the official CapMonster SDK for PHP, it is a cost-effective 2captcha alternative and capsolver alternative.
+<p align="center">
+  <strong>Fast, AI-driven CAPTCHA solving client for PHP. Seamlessly bypass Cloudflare Turnstile, reCAPTCHA v2/v3/Enterprise and GeeTest in web scraping and browser automation.</strong>
+</p>
 
-To get your API key, follow the [Getting Started Guide](https://docs.capmonster.cloud/docs/getting-start/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme): register on CapMonster Cloud, top up your balance and use your personal API key in the client.
+<p align="center">
+  <a href="https://github.com/CapMonsterCloud/capmonster-php-captcha-solver/stargazers"><img src="https://img.shields.io/github/stars/CapMonsterCloud/capmonster-php-captcha-solver?style=flat-square&color=yellow" alt="GitHub Stars"></a>
+  <a href="https://github.com/CapMonsterCloud/capmonster-php-captcha-solver/network/members"><img src="https://img.shields.io/github/forks/CapMonsterCloud/capmonster-php-captcha-solver?style=flat-square" alt="GitHub Forks"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-orange.svg?style=flat-square" alt="License: MIT"></a>
+</p>
 
 ---
 
-## Key Features
+PHP client library for the [CapMonster Cloud](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) captcha solving API. Use this PHP captcha solver for captcha bypass: bypass reCAPTCHA v2, reCAPTCHA v3, reCAPTCHA v2 Enterprise and Cloudflare Turnstile, solve GeeTest, reCAPTCHA image-click and text (image-to-text) captchas in web scraping, browser automation and backend scripts: send a request class to the `solve` method and get a ready solution. As the official CapMonster SDK for PHP, it is a cost-effective 2captcha alternative and capsolver alternative.
 
-- **Captcha bypass in one call:** create a request object and pass it to `$client->solve()`.
-- **reCAPTCHA bypass and Cloudflare Turnstile bypass:** ready-made request classes for reCAPTCHA v2, v2 Enterprise and v3, Cloudflare Turnstile, GeeTest, image-to-text and reCAPTCHA image-click captchas, with and without a proxy where supported.
-- **Unified response:** every call returns the same structure, so success and error handling stays simple.
-- **Cheaper than alternatives:** reCAPTCHA v3 from $0.90 per 1,000 solves, versus $1.45 at 2Captcha and $1.00 at Capsolver.
-- **Easy migration:** replace your 2Captcha or Capsolver solver call and keep the rest of your scraper or bot unchanged.
-- **Backed by the official API:** request types follow the [CapMonster Cloud API documentation](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
+**[👉 Get your Free API Key & Free Trial Balance on CapMonster Cloud](https://dash.capmonster.cloud/Account/SignUp?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme)**
+
+---
+
+## ⚡ Highlights
+
+- ⚡ **Fast solving:** AI-based recognition, on average between 1 and 30 seconds depending on the captcha type.
+- 🤖 **Zero human workers:** 100% automated machine learning pipeline with no manual latencies.
+- 🛡️ **Modern anti-bot bypass:** Support for Cloudflare Turnstile, reCAPTCHA Enterprise, GeeTest and FunCaptcha.
+- 🧩 **One call to solve a captcha:** create a request object and pass it to `$client->solve()`.
+- 🔁 **Unified response:** every call returns the same structure, so success and error handling stays simple.
+- 💰 **Cost-effective:** Low-cost pricing structure based on pay-as-you-go balance.
+- 📉 **Cheaper than alternatives:** reCAPTCHA v3 from $0.90 per 1,000 solves, versus $1.45 at 2Captcha and $1.00 at Capsolver.
+- 🔄 **Easy migration:** replace your 2Captcha or Capsolver solver call and keep the rest of your scraper or bot unchanged.
+- 📖 **Official docs:** request types follow the [CapMonster Cloud API documentation](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
 
 ---
 
@@ -56,39 +71,43 @@ Looking for a 2captcha alternative or a capsolver alternative for PHP web scrapi
 
 ---
 
-## Usage: Solve and Bypass Captchas in PHP
+## 📦 Installation
+
+Clone or download this repository and include the client files as shown in the Usage example below. The examples use relative `include` paths, so run them from the repository root.
+
+---
+
+## 🚀 Quick Start: Solve and Bypass Captchas in PHP
 
 ```php
     include './client/Client.php';
     include './client/src/captcha/ImageToText.php';
     include './client/src/captcha/RecaptchaV2.php';
     include './client/src/captcha/HCaptcha.php';
-    
+
     $client = new Client("your_client_key");
 
     //solve image captcha
     $body = "base64_captcha_image";
     $imageRequest = new ImageToTextRequest($body);
     $imageResult = $client->solve($imageRequest);
-    
+
     //solve Recaptcha 2 (without proxy)
-    $websiteURL = "[https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high](https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high)";
+    $websiteURL = "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high";
     $websiteKey = "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd";
     $recaptchaV2Request = new RecaptchaV2Request($websiteURL, $websiteKey);
     $recaptchaV2Result = $client->solve($recaptchaV2Request);
-    
+
     // solve HCaptcha (without proxy)
-    $websiteUrl = "[https://lessons.zennolab.com/captchas/hcaptcha/?level=easy](https://lessons.zennolab.com/captchas/hcaptcha/?level=easy)";
+    $websiteUrl = "https://lessons.zennolab.com/captchas/hcaptcha/?level=easy";
     $websiteKey = "472fc7af-86a4-4382-9a49-ca9090474471";
     $hcatpchaRequest = new HCaptchaRequest($websiteURL, $websiteKey);
     $hcaptchaResult = $client->solve($hcatpchaRequest);
 ```
 
----
+### Response format
 
-## Response format
-
- The result of the solve method always contains two fields: bool result, a request success indicator, and a mixed message field containing a text description of the error or an object of a successful response from the server.
+The result of the solve method always contains two fields: bool result, a request success indicator, and a mixed message field containing a text description of the error or an object of a successful response from the server.
 
 ---
 
@@ -96,17 +115,21 @@ Looking for a 2captcha alternative or a capsolver alternative for PHP web scrapi
 
 Already use 2Captcha or Capsolver in your PHP scraper or bot? Replace only the solver call and keep the rest of your code unchanged. CapMonster Cloud follows the same flow: send the website URL and sitekey, receive the token.
 
-### Migration from 2Captcha (2captcha-php)
+### Before: 2Captcha (2captcha-php)
 
 ```php
 // Before: 2Captcha
 $solver = new \TwoCaptcha\TwoCaptcha('YOUR_2CAPTCHA_API_KEY');
 $result = $solver->recaptcha([
     'sitekey' => 'YOUR_SITE_KEY',
-    'url'     => '[https://target-website.com/page-with-recaptcha](https://target-website.com/page-with-recaptcha)',
+    'url'     => 'https://target-website.com/page-with-recaptcha',
 ]);
 $token = $result->code;
 ```
+
+### Migrating from Capsolver
+
+CapMonster Cloud uses the same `createTask` / `getTaskResult` flow, so if you call the Capsolver HTTP API directly from PHP, you can switch to the CapMonster Cloud PHP SDK or follow the [API Methods Reference](https://docs.capmonster.cloud/docs/methods/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
 
 ### After: CapMonster Cloud
 
@@ -118,7 +141,7 @@ include './client/src/captcha/RecaptchaV2.php';
 $client = new Client("YOUR_CAPMONSTER_API_KEY");
 
 $request = new RecaptchaV2Request(
-    "[https://target-website.com/page-with-recaptcha](https://target-website.com/page-with-recaptcha)",
+    "https://target-website.com/page-with-recaptcha",
     "YOUR_SITE_KEY"
 );
 $result = $client->solve($request);
@@ -133,21 +156,17 @@ if ($result->result) {
 
 Only the client, the API key and the request class change: the token is used exactly as before, so the rest of your scraper stays the same.
 
-### Migrating from Capsolver
-
-CapMonster Cloud uses the same `createTask` / `getTaskResult` flow, so if you call the Capsolver HTTP API directly from PHP, you can switch to the CapMonster Cloud PHP SDK above or follow the [API Methods Reference](https://docs.capmonster.cloud/docs/api/methods/create-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
-
 ### Keep existing 2Captcha-based software
 
 Software that already speaks the 2Captcha API can work with CapMonster Cloud without code changes. See the [guide for connecting other services' APIs](https://docs.capmonster.cloud/docs/external-services/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
 
 ---
 
-## Supported captchas: Bypass reCAPTCHA, Cloudflare Turnstile, GeeTest and More
+## 🛡️ Supported CAPTCHA Types: Bypass reCAPTCHA, Cloudflare Turnstile, GeeTest and More
 
 Use this PHP captcha solver for captcha bypass in web scraping and automation: reCAPTCHA bypass (v2, v2 Enterprise, v3), Cloudflare Turnstile solver, GeeTest solver, FunCaptcha solving and image-to-text recognition.
 
-Every request class below follows the official [CapMonster Cloud API documentation](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme):
+All task types follow the official [CapMonster Cloud API documentation](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme):
 
 | Captcha type | PHP request classes | Documentation |
 | :--- | :--- | :--- |
@@ -161,7 +180,45 @@ Every request class below follows the official [CapMonster Cloud API documentati
 
 ---
 
-## FAQ
+## 🛠️ How It Works
+
+```text
+[ Your PHP script ]
+         │
+         ▼
+[ Extract sitekey & website URL ]
+         │
+         ▼
+[ CapMonster Cloud PHP SDK ] ──► createTask API request
+         │
+         ▼
+[ Neural Network Processing ] ──► Poll getTaskResult until the task is ready
+         │
+         ▼
+[ Receive Token & Autosubmit ] ──► Complete bypass
+```
+
+---
+
+## ⚙️ Best Practices
+
+- **Use tokens promptly:** CAPTCHA tokens expire quickly (a reCAPTCHA v2 token is valid for 60 seconds after solving), so submit or inject the solution immediately after receiving the response.
+- **Keep session context consistent:** When a task uses a proxy, use the same proxy in your scraping or browser session and in the CapMonster task.
+- **Use the right task type:** Choose the request type that matches the target protection and follow the required parameters in the [documentation](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
+- **Monitor your balance:** Keep your account balance positive in the [Dashboard](https://dash.capmonster.cloud/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) and handle API errors in your code.
+
+---
+
+## 💡 Use Cases
+
+- **Web scraping and data collection** from websites you are authorized to access, without manual captcha solving.
+- **Browser automation:** get the solution token in PHP and inject it into the page with your automation tool.
+- **Automated testing (QA)** of your own website and its captcha-protected forms.
+- **Backend services** that need a captcha solving API inside a PHP application.
+
+---
+
+## ❓ FAQ
 
 **Is CapMonster Cloud a 2Captcha alternative for PHP?**
 Yes. It is a captcha solving service with an official PHP SDK. For reCAPTCHA v3 it starts at $0.90 per 1,000 solves versus $1.45 at 2Captcha, which is up to 38% cheaper. For Cloudflare Turnstile it starts at $1.30 versus $1.45, which is 10% cheaper.
@@ -169,14 +226,67 @@ Yes. It is a captcha solving service with an official PHP SDK. For reCAPTCHA v3 
 **Is CapMonster Cloud a Capsolver alternative for PHP?**
 Yes. For reCAPTCHA v3 it is 10% cheaper than Capsolver ($0.90 versus $1.00 per 1,000 solves) and shows an API response time of ≤ 2 s versus < 3 s. See the comparison table above and its disclaimer.
 
-**How do I migrate from 2captcha-php to CapMonster Cloud?**
+**How do I migrate from 2Captcha or Capsolver to CapMonster Cloud in PHP?**
 Create a `Client` with your CapMonster Cloud API key, build the matching request class and call `$client->solve()`. See the migration examples above. Software that already supports the 2Captcha API can also be connected through the [CapMonster Cloud guide](https://docs.capmonster.cloud/docs/external-services/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
+
+**Is there an official PHP captcha solver from CapMonster Cloud?**
+Yes. This repository is the official PHP client library for the CapMonster Cloud captcha solving service.
 
 **How do I bypass reCAPTCHA v2 in PHP?**
 Create a `Client` with your API key, build a `RecaptchaV2Request` with the page URL and sitekey, call `$client->solve($request)` and read the token from `$result->message['gRecaptchaResponse']`. See the [reCAPTCHA v2 documentation](https://docs.capmonster.cloud/docs/captchas/no-captcha-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
 
 **How do I bypass Cloudflare Turnstile in PHP?**
-Use `TurnstileProxylessRequest` or `TurnstileRequest` from the table above. According to the [Turnstile documentation](https://docs.capmonster.cloud/docs/captchas/turnstile-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme), all Turnstile subtypes are supported automatically: manual, non-interactive and invisible.
+Use `TurnstileProxylessRequest` or `TurnstileRequest` from the supported types table above. According to the [Turnstile documentation](https://docs.capmonster.cloud/docs/captchas/turnstile-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme), all Turnstile subtypes are supported automatically: manual, non-interactive and invisible.
 
 **Which captcha types does the PHP SDK solve?**
-See the table above. You can also browse the [Supported Captchas Overview](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) for all task types of the service
+reCAPTCHA v2, v2 Enterprise and v3, Cloudflare Turnstile, GeeTest, image-to-text and reCAPTCHA image-click tasks. See the supported types table above and the [Supported Captchas Overview](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
+
+**How do I get an API key?**
+Register on CapMonster Cloud, top up your balance and copy your API key. The [Getting Started Guide](https://docs.capmonster.cloud/docs/getting-start/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) describes each step.
+
+**How fast are captchas solved?**
+On average between 1 and 30 seconds, depending on the captcha type. More details are in the [CapMonster Cloud FAQ](https://docs.capmonster.cloud/docs/faq/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
+
+**How long is a reCAPTCHA v2 solution valid?**
+According to the [reCAPTCHA v2 documentation](https://docs.capmonster.cloud/docs/captchas/no-captcha-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme), the returned token is valid for 60 seconds after the captcha is solved, so use it right away.
+
+**Where is the full API reference?**
+See the [API Methods Reference](https://docs.capmonster.cloud/docs/methods/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
+
+**What does the `solve` method return?**
+A result with two fields: a boolean `result` (request success indicator) and a `message` that holds either a text description of the error or the object of a successful server response.
+
+---
+
+## ⚖️ Responsible Use
+
+CapMonster Cloud is intended for legitimate business purposes only, such as testing your own website or a website you are authorized to test, and recognizing images you provide. Read more about [ethical and transparent captcha automation](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
+
+---
+
+## 📚 Documentation & Support
+
+- 📖 [Getting Started Guide](https://docs.capmonster.cloud/docs/getting-start/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme)
+- 🎯 [Supported Captchas Overview](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme)
+- ⚙️ [API Methods Reference](https://docs.capmonster.cloud/docs/methods/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme)
+- ❓ [CapMonster Cloud FAQ](https://docs.capmonster.cloud/docs/faq/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme)
+- 🌐 [Browser Extension Guides](https://docs.capmonster.cloud/docs/extension/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme)
+- 💬 [Support & Community](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme#support)
+
+## Other official SDKs & integrations
+
+- [Python](https://github.com/CapMonsterCloud/capmonster-python-captcha-solver)
+- [Node.js](https://github.com/CapMonsterCloud/capmonster-nodejs-captcha-solver)
+- [.NET](https://github.com/CapMonsterCloud/capmonster-dotnet-captcha-solver)
+- [Go](https://github.com/CapMonsterCloud/capmonster-go-captcha-solver)
+- [Rust](https://github.com/CapMonsterCloud/capmonster-rust-captcha-solver)
+- [n8n](https://github.com/CapMonsterCloud/capmonster-n8n-captcha-solver)
+- [MCP server](https://github.com/CapMonsterCloud/capmonster-mcp-captcha-solver)
+- [MCP server for Patchright](https://github.com/CapMonsterCloud/capmonster-mcp-patchright-captcha-solver)
+- [API Docs](https://github.com/CapMonsterCloud/capmonster-captcha-solver-docs)
+
+---
+
+## 📄 License
+
+[MIT](./LICENSE) © [CapMonster Cloud](https://capmonster.cloud/en/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme)
