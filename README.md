@@ -32,7 +32,7 @@ PHP client library for the [CapMonster Cloud](https://capmonster.cloud/en/?utm_s
 - 🤖 **Zero human workers:** 100% automated machine learning pipeline with no manual latencies.
 - 🛡️ **Modern anti-bot bypass:** Support for Cloudflare Turnstile, reCAPTCHA Enterprise, GeeTest and FunCaptcha.
 - 🧩 **One call to solve a captcha:** create a request object and pass it to `$client->solve()`.
-- 🔁 **Unified response:** every call returns the same structure, so success and error handling stays simple.
+- 🔁 **Simple results and typed errors:** `solve()` returns the solution as an array; failures throw exceptions from one `CapMonsterException` hierarchy.
 - 💰 **Cost-effective:** Low-cost pricing structure based on pay-as-you-go balance.
 - 📉 **Cheaper than alternatives:** reCAPTCHA v3 from $0.90 per 1,000 solves, versus $1.45 at 2Captcha and $1.00 at Capsolver.
 - 🔄 **Easy migration:** replace your 2Captcha or Capsolver solver call and keep the rest of your scraper or bot unchanged.
@@ -73,41 +73,71 @@ Looking for a 2captcha alternative or a capsolver alternative for PHP web scrapi
 
 ## 📦 Installation
 
-Clone or download this repository and include the client files as shown in the Usage example below. The examples use relative `include` paths, so run them from the repository root.
+Install the package with [Composer](https://getcomposer.org/). PHP 8.1 or newer with the `curl` and `json` extensions is required.
+
+```bash
+composer require zennolab/capmonstercloud.client
+```
+
+Then load Composer's autoloader with `require 'vendor/autoload.php';` as shown below.
 
 ---
 
 ## 🚀 Quick Start: Solve and Bypass Captchas in PHP
 
 ```php
-    include './client/Client.php';
-    include './client/src/captcha/ImageToText.php';
-    include './client/src/captcha/RecaptchaV2.php';
-    include './client/src/captcha/HCaptcha.php';
+<?php
+require 'vendor/autoload.php';
 
-    $client = new Client("your_client_key");
+use Zennolab\CapMonsterCloud\CapMonsterClient;
+use Zennolab\CapMonsterCloud\ClientOptions;
+use Zennolab\CapMonsterCloud\Requests\ImageToTextRequest;
+use Zennolab\CapMonsterCloud\Requests\RecaptchaV2Request;
+use Zennolab\CapMonsterCloud\Requests\TurnstileRequest;
 
-    //solve image captcha
-    $body = "base64_captcha_image";
-    $imageRequest = new ImageToTextRequest($body);
-    $imageResult = $client->solve($imageRequest);
+$client = new CapMonsterClient(new ClientOptions('your_client_key'));
 
-    //solve Recaptcha 2 (without proxy)
-    $websiteURL = "https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high";
-    $websiteKey = "6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd";
-    $recaptchaV2Request = new RecaptchaV2Request($websiteURL, $websiteKey);
-    $recaptchaV2Result = $client->solve($recaptchaV2Request);
+// check balance
+echo $client->getBalance(), PHP_EOL;
 
-    // solve HCaptcha (without proxy)
-    $websiteUrl = "https://lessons.zennolab.com/captchas/hcaptcha/?level=easy";
-    $websiteKey = "472fc7af-86a4-4382-9a49-ca9090474471";
-    $hcatpchaRequest = new HCaptchaRequest($websiteURL, $websiteKey);
-    $hcaptchaResult = $client->solve($hcatpchaRequest);
+// solve image captcha
+$imageResult = $client->solve(ImageToTextRequest::fromFile('captcha.png'));
+echo $imageResult['text'], PHP_EOL;
+
+// solve reCAPTCHA v2 (without proxy)
+$recaptchaV2Result = $client->solve(new RecaptchaV2Request(
+    'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high',
+    '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
+));
+echo $recaptchaV2Result['gRecaptchaResponse'], PHP_EOL;
+
+// solve Cloudflare Turnstile (without proxy)
+$turnstileResult = $client->solve(TurnstileRequest::standard(
+    'https://target-website.com/login',
+    '0x4AAAAAAABnPIDnK2k_e-2',
+));
+echo $turnstileResult['token'], PHP_EOL;
 ```
 
 ### Response format
 
-The result of the solve method always contains two fields: bool result, a request success indicator, and a mixed message field containing a text description of the error or an object of a successful response from the server.
+`solve()` returns the `solution` object of the server response as an associative array, for example `['gRecaptchaResponse' => '...']` for reCAPTCHA or `['text' => '...']` for an image. If the task cannot be solved, `solve()` throws an exception:
+
+```php
+use Zennolab\CapMonsterCloud\Exception\CapMonsterException;
+use Zennolab\CapMonsterCloud\Exception\GetResultException;
+use Zennolab\CapMonsterCloud\Exception\TimeoutException;
+
+try {
+    $solution = $client->solve($request);
+} catch (GetResultException $e) {
+    // the API returned an error, e.g. $e->errorCode === 'ERROR_CAPTCHA_UNSOLVABLE'
+} catch (TimeoutException $e) {
+    // no solution within the maximum waiting time of this captcha type
+} catch (CapMonsterException $e) {
+    // anything else: invalid request, network error, wrong key, zero balance...
+}
+```
 
 ---
 
@@ -135,22 +165,25 @@ CapMonster Cloud uses the same `createTask` / `getTaskResult` flow, so if you ca
 
 ```php
 <?php
-include './client/Client.php';
-include './client/src/captcha/RecaptchaV2.php';
+require 'vendor/autoload.php';
 
-$client = new Client("YOUR_CAPMONSTER_API_KEY");
+use Zennolab\CapMonsterCloud\CapMonsterClient;
+use Zennolab\CapMonsterCloud\ClientOptions;
+use Zennolab\CapMonsterCloud\Exception\CapMonsterException;
+use Zennolab\CapMonsterCloud\Requests\RecaptchaV2Request;
+
+$client = new CapMonsterClient(new ClientOptions('YOUR_CAPMONSTER_API_KEY'));
 
 $request = new RecaptchaV2Request(
-    "https://target-website.com/page-with-recaptcha",
-    "YOUR_SITE_KEY"
+    'https://target-website.com/page-with-recaptcha',
+    'YOUR_SITE_KEY',
 );
-$result = $client->solve($request);
 
-if ($result->result) {
-    $token = $result->message['gRecaptchaResponse'];
+try {
+    $token = $client->solve($request)['gRecaptchaResponse'];
     echo $token;
-} else {
-    echo $result->message;
+} catch (CapMonsterException $e) {
+    echo $e->getMessage();
 }
 ```
 
@@ -170,12 +203,12 @@ All task types follow the official [CapMonster Cloud API documentation](https://
 
 | Captcha type | PHP request classes | Documentation |
 | :--- | :--- | :--- |
-| reCAPTCHA v2 | `RecaptchaV2ProxylessRequest`, `RecaptchaV2Request` | [RecaptchaV2Task](https://docs.capmonster.cloud/docs/captchas/no-captcha-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
-| reCAPTCHA v2 Enterprise | `RecaptchaV2EnterpriseProxylessRequest`, `RecaptchaV2EnterpriseRequest` | [RecaptchaV2EnterpriseTask](https://docs.capmonster.cloud/docs/captchas/recaptcha-v2-enterprise-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| reCAPTCHA v2 | `RecaptchaV2Request` (optional proxy) | [RecaptchaV2Task](https://docs.capmonster.cloud/docs/captchas/no-captcha-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| reCAPTCHA v2 Enterprise | `RecaptchaV2EnterpriseRequest` (optional proxy) | [RecaptchaV2EnterpriseTask](https://docs.capmonster.cloud/docs/captchas/recaptcha-v2-enterprise-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
 | reCAPTCHA v3 | `RecaptchaV3ProxylessRequest` | [RecaptchaV3TaskProxyless](https://docs.capmonster.cloud/docs/captchas/recaptcha-v3-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
 | reCAPTCHA image-click (ComplexImageTask) | `RecaptchaComplexImageTaskRequest` | [ComplexImageTask reCAPTCHA](https://docs.capmonster.cloud/docs/captchas/recaptcha-click/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
-| Cloudflare Turnstile | `TurnstileProxylessRequest`, `TurnstileRequest` | [TurnstileTask](https://docs.capmonster.cloud/docs/captchas/turnstile-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
-| GeeTest | `GeeTestProxylessRequest`, `GeeTestRequest` | [GeeTestTask](https://docs.capmonster.cloud/docs/captchas/geetest-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Cloudflare Turnstile | `TurnstileRequest::standard()` and other `TurnstileRequest` factories | [TurnstileTask](https://docs.capmonster.cloud/docs/captchas/turnstile-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| GeeTest | `GeetestRequest::v3()`, `GeetestRequest::v4()` | [GeeTestTask](https://docs.capmonster.cloud/docs/captchas/geetest-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
 | Text captcha (image to text) | `ImageToTextRequest` | [ImageToTextTask](https://docs.capmonster.cloud/docs/captchas/image-to-text/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
 
 ---
@@ -227,16 +260,16 @@ Yes. It is a captcha solving service with an official PHP SDK. For reCAPTCHA v3 
 Yes. For reCAPTCHA v3 it is 10% cheaper than Capsolver ($0.90 versus $1.00 per 1,000 solves) and shows an API response time of ≤ 2 s versus < 3 s. See the comparison table above and its disclaimer.
 
 **How do I migrate from 2Captcha or Capsolver to CapMonster Cloud in PHP?**
-Create a `Client` with your CapMonster Cloud API key, build the matching request class and call `$client->solve()`. See the migration examples above. Software that already supports the 2Captcha API can also be connected through the [CapMonster Cloud guide](https://docs.capmonster.cloud/docs/external-services/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
+Create a `CapMonsterClient` with your CapMonster Cloud API key, build the matching request class and call `$client->solve()`. See the migration examples above. Software that already supports the 2Captcha API can also be connected through the [CapMonster Cloud guide](https://docs.capmonster.cloud/docs/external-services/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
 
 **Is there an official PHP captcha solver from CapMonster Cloud?**
 Yes. This repository is the official PHP client library for the CapMonster Cloud captcha solving service.
 
 **How do I bypass reCAPTCHA v2 in PHP?**
-Create a `Client` with your API key, build a `RecaptchaV2Request` with the page URL and sitekey, call `$client->solve($request)` and read the token from `$result->message['gRecaptchaResponse']`. See the [reCAPTCHA v2 documentation](https://docs.capmonster.cloud/docs/captchas/no-captcha-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
+Create a `CapMonsterClient` with your API key, build a `RecaptchaV2Request` with the page URL and sitekey, call `$client->solve($request)` and read the token from the `gRecaptchaResponse` key of the returned array. See the [reCAPTCHA v2 documentation](https://docs.capmonster.cloud/docs/captchas/no-captcha-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
 
 **How do I bypass Cloudflare Turnstile in PHP?**
-Use `TurnstileProxylessRequest` or `TurnstileRequest` from the supported types table above. According to the [Turnstile documentation](https://docs.capmonster.cloud/docs/captchas/turnstile-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme), all Turnstile subtypes are supported automatically: manual, non-interactive and invisible.
+Use `TurnstileRequest::standard()` (pass `proxy:` to solve through your proxy) from the supported types table above. According to the [Turnstile documentation](https://docs.capmonster.cloud/docs/captchas/turnstile-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme), all Turnstile subtypes are supported automatically: manual, non-interactive and invisible.
 
 **Which captcha types does the PHP SDK solve?**
 reCAPTCHA v2, v2 Enterprise and v3, Cloudflare Turnstile, GeeTest, image-to-text and reCAPTCHA image-click tasks. See the supported types table above and the [Supported Captchas Overview](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
@@ -254,7 +287,7 @@ According to the [reCAPTCHA v2 documentation](https://docs.capmonster.cloud/docs
 See the [API Methods Reference](https://docs.capmonster.cloud/docs/methods/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme).
 
 **What does the `solve` method return?**
-A result with two fields: a boolean `result` (request success indicator) and a `message` that holds either a text description of the error or the object of a successful server response.
+The `solution` object of the server response as an associative array. Errors are thrown as exceptions that extend `CapMonsterException`, for example `GetResultException` with the API `errorCode`, or `TimeoutException`.
 
 ---
 

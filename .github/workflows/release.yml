@@ -1,0 +1,62 @@
+name: Release
+
+# Tags `vX.Y.Z` and creates a GitHub Release when CapMonsterClient::VERSION on main has no tag yet;
+# Packagist picks the new tag up through its GitHub hook. Any other push to main is a no-op.
+# To release: bump CapMonsterClient::VERSION + add a `## [X.Y.Z]` section to CHANGELOG.md in a PR and merge it.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Read version
+        id: v
+        run: echo "version=$(sed -nE "s/.*const VERSION = '([^']+)'.*/\1/p" src/CapMonsterClient.php)" >> "$GITHUB_OUTPUT"
+
+      - name: Already tagged?
+        id: tagged
+        run: |
+          if git rev-parse -q --verify "refs/tags/v${{ steps.v.outputs.version }}" > /dev/null; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "v${{ steps.v.outputs.version }} already exists, nothing to release."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: shivammathur/setup-php@v2
+        if: steps.tagged.outputs.exists == 'false'
+        with:
+          php-version: '8.3'
+          coverage: none
+      - uses: ramsey/composer-install@v3
+        if: steps.tagged.outputs.exists == 'false'
+
+      - name: Checks before releasing
+        if: steps.tagged.outputs.exists == 'false'
+        run: |
+          grep -q "^## \[${{ steps.v.outputs.version }}\]" CHANGELOG.md \
+            || { echo "CHANGELOG.md has no section for ${{ steps.v.outputs.version }}"; exit 1; }
+          vendor/bin/phpunit
+
+      - name: Tag and GitHub Release
+        if: steps.tagged.outputs.exists == 'false'
+        run: |
+          gh release create "v${{ steps.v.outputs.version }}" \
+            --target "${{ github.sha }}" \
+            --title "v${{ steps.v.outputs.version }}" \
+            --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}

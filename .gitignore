@@ -1,2 +1,5 @@
-/client/vendor
+/vendor/
+composer.lock
+.phpunit.cache/
+.phpunit.result.cache
 .idea/
