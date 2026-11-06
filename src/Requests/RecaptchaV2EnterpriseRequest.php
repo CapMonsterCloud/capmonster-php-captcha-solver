@@ -24,6 +24,7 @@ final class RecaptchaV2EnterpriseRequest extends AbstractRequest
      * @param string|null $apiDomain  Domain to load reCAPTCHA Enterprise from: `www.google.com` or `www.recaptcha.net`.
      * @param string|null $pageAction Value of the `action` parameter, if it differs from the default `verify`.
      * @param string|null $cookies    Cookies as `"name1=value1; name2=value2"`.
+     * @param float|null  $minScore   Minimum score of the token, 0.1..0.9.
      */
     public function __construct(
         public readonly string $websiteUrl,
@@ -34,6 +35,7 @@ final class RecaptchaV2EnterpriseRequest extends AbstractRequest
         public readonly ?string $pageAction = null,
         public readonly ?string $userAgent = null,
         public readonly ?string $cookies = null,
+        public readonly ?float $minScore = null,
     ) {
     }
 
@@ -49,6 +51,7 @@ final class RecaptchaV2EnterpriseRequest extends AbstractRequest
         if ($this->enterprisePayload === []) {
             throw new ValidationException('enterprisePayload must not be an empty array');
         }
+        RecaptchaV3ProxylessRequest::checkMinScore($this->minScore);
     }
 
     protected function fields(): array
@@ -61,6 +64,7 @@ final class RecaptchaV2EnterpriseRequest extends AbstractRequest
             'pageAction' => $this->pageAction,
             'userAgent' => $this->userAgent,
             'cookies' => $this->cookies,
+            'minScore' => $this->minScore,
         ] + self::proxyFields($this->proxy);
     }
 }

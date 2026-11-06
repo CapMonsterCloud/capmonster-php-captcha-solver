@@ -47,6 +47,10 @@ final class RequestsTest extends TestCase
             ['type' => 'RecaptchaV2EnterpriseTask', 'websiteURL' => $u, 'websiteKey' => 'KEY',
                 'enterprisePayload' => ['s' => 'S'], 'apiDomain' => 'www.recaptcha.net', 'pageAction' => 'login'],
         ];
+        yield 'recaptcha v2 enterprise with minScore' => [
+            new Requests\RecaptchaV2EnterpriseRequest($u, 'KEY', minScore: 0.7),
+            ['type' => 'RecaptchaV2EnterpriseTask', 'websiteURL' => $u, 'websiteKey' => 'KEY', 'minScore' => 0.7],
+        ];
         yield 'recaptcha v3' => [
             new Requests\RecaptchaV3ProxylessRequest($u, 'KEY', minScore: 0.3, pageAction: 'verify', isEnterprise: false),
             ['type' => 'RecaptchaV3TaskProxyless', 'websiteURL' => $u, 'websiteKey' => 'KEY', 'minScore' => 0.3,
@@ -223,6 +227,7 @@ final class RequestsTest extends TestCase
         yield 'empty websiteKey' => [fn () => Requests\TurnstileRequest::standard($u, ''), 'websiteKey'];
         yield 'minScore too high' => [fn () => new Requests\RecaptchaV3ProxylessRequest($u, 'KEY', 1.1), 'minScore'];
         yield 'minScore too low (enterprise)' => [fn () => new Requests\RecaptchaV3EnterpriseRequest($u, 'KEY', 0.05), 'minScore'];
+        yield 'minScore too high (v2 enterprise)' => [fn () => new Requests\RecaptchaV2EnterpriseRequest($u, 'KEY', minScore: 0.95), 'minScore'];
         yield 'empty enterprisePayload' => [fn () => new Requests\RecaptchaV2EnterpriseRequest($u, 'KEY', enterprisePayload: []), 'enterprisePayload'];
         yield 'threshold out of range' => [fn () => new Requests\ImageToTextRequest('QUJD', recognizingThreshold: 101), 'recognizingThreshold'];
         yield 'empty image body' => [fn () => new Requests\ImageToTextRequest(''), 'body'];
