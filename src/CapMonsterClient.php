@@ -19,7 +19,7 @@ use CapMonsterCloud\Requests\CaptchaRequest;
 final class CapMonsterClient
 {
     /** SDK version, also sent in the User-Agent. Bumped on every release (see CHANGELOG.md). */
-    public const VERSION = '2.0.0';
+    public const VERSION = '2.0.1';
 
     /** HTTP statuses that `getTaskResult` sometimes returns while the task is still being processed. */
     private const PROCESSING_STATUSES = [500, 503];

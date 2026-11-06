@@ -3,6 +3,11 @@
 All notable changes to this package are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versions follow [SemVer](https://semver.org/).
 
+## [2.0.1]
+
+### Added
+- Optional `minScore` (0.1..0.9) for `RecaptchaV2EnterpriseRequest`.
+
 ## [2.0.0]
 
 Full rewrite. **Breaking:** the 1.x API (`Client`, `*Request` classes in the global namespace,
