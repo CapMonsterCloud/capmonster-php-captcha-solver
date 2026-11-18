@@ -204,11 +204,29 @@ All task types follow the official [CapMonster Cloud API documentation](https://
 | Captcha type | PHP request classes | Documentation |
 | :--- | :--- | :--- |
 | reCAPTCHA v2 | `RecaptchaV2Request` (optional proxy) | [RecaptchaV2Task](https://docs.capmonster.cloud/docs/captchas/no-captcha-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
-| reCAPTCHA v2 Enterprise | `RecaptchaV2EnterpriseRequest` (optional proxy) | [RecaptchaV2EnterpriseTask](https://docs.capmonster.cloud/docs/captchas/recaptcha-v2-enterprise-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
-| reCAPTCHA v3 | `RecaptchaV3ProxylessRequest` | [RecaptchaV3TaskProxyless](https://docs.capmonster.cloud/docs/captchas/recaptcha-v3-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| reCAPTCHA v2 Enterprise | `RecaptchaV2EnterpriseRequest` (optional proxy, optional `$minScore` 0.1–0.9) | [RecaptchaV2EnterpriseTask](https://docs.capmonster.cloud/docs/captchas/recaptcha-v2-enterprise-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| reCAPTCHA v3 | `RecaptchaV3ProxylessRequest` (optional `$minScore` 0.1–0.9) | [RecaptchaV3TaskProxyless](https://docs.capmonster.cloud/docs/captchas/recaptcha-v3-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| reCAPTCHA v3 Enterprise | `RecaptchaV3EnterpriseRequest` (optional `$minScore` 0.1–0.9) | [RecaptchaV3EnterpriseTask](https://docs.capmonster.cloud/docs/captchas/recaptcha-v3-enterprise-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
 | reCAPTCHA image-click (ComplexImageTask) | `RecaptchaComplexImageTaskRequest` | [ComplexImageTask reCAPTCHA](https://docs.capmonster.cloud/docs/captchas/recaptcha-click/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Dynamic image (ComplexImageTask) | `RecognitionComplexImageTaskRequest` | [ComplexImageTask](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
 | Cloudflare Turnstile | `TurnstileRequest::standard()` and other `TurnstileRequest` factories | [TurnstileTask](https://docs.capmonster.cloud/docs/captchas/turnstile-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
 | GeeTest | `GeetestRequest::v3()`, `GeetestRequest::v4()` | [GeeTestTask](https://docs.capmonster.cloud/docs/captchas/geetest-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| FunCaptcha (Arkose Labs) | `FuncaptchaRequest` | [FunCaptchaTask](https://docs.capmonster.cloud/docs/captchas/funcaptcha-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Amazon AWS WAF | `AmazonWafRequest` | [AmazonTask](https://docs.capmonster.cloud/docs/captchas/amazon-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Binance | `BinanceTaskRequest` | [BinanceTask](https://docs.capmonster.cloud/docs/captchas/binance/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| DataDome | `DataDomeCustomTaskRequest` | [DataDome](https://docs.capmonster.cloud/docs/captchas/datadome/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Imperva (Incapsula) | `ImpervaCustomTaskRequest` | [Imperva](https://docs.capmonster.cloud/docs/captchas/incapsula/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| TSPD | `TspdCustomTaskRequest` | [TSPD](https://docs.capmonster.cloud/docs/captchas/tspd-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| TenDI (Tencent) | `TenDiCustomTaskRequest` | [TenDI](https://docs.capmonster.cloud/docs/captchas/tendi/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Basilisk | `BasiliskCustomTaskRequest` | [BasiliskTask](https://docs.capmonster.cloud/docs/captchas/Basilisk-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Alibaba | `AlibabaCustomTaskRequest` | [Alibaba](https://docs.capmonster.cloud/docs/captchas/alibaba-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Altcha | `AltchaCustomTaskRequest` | [Altcha](https://docs.capmonster.cloud/docs/captchas/altcha-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Friendly Captcha | `FriendlyCustomTaskRequest` | [Friendly](https://docs.capmonster.cloud/docs/captchas/friendly-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Hunt | `HuntCustomTaskRequest` | [Hunt](https://docs.capmonster.cloud/docs/captchas/hunt-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| FengkongCloud, ARCaptcha, HeyTap and Proton | `FengkongCloudCustomTaskRequest`, `ArCaptchaRequest`, `HeyTapCustomTaskRequest`, `ProtonCustomTaskRequest` | [FengkongCloud](https://docs.capmonster.cloud/docs/captchas/fengkongcloud-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme), [ARCaptcha](https://docs.capmonster.cloud/docs/captchas/arcaptcha-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme), [HeyTap](https://docs.capmonster.cloud/docs/captchas/heytap-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme), [Proton](https://docs.capmonster.cloud/docs/captchas/proton-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| MTCaptcha | `MtCaptchaRequest` | [MTCaptcha](https://docs.capmonster.cloud/docs/captchas/mtcaptcha-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Prosopo | `ProsopoTaskRequest` | [Prosopo](https://docs.capmonster.cloud/docs/captchas/prosopo-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Yidun (NECaptcha) | `YidunRequest` | [Yidun](https://docs.capmonster.cloud/docs/captchas/yidun-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
 | Text captcha (image to text) | `ImageToTextRequest` | [ImageToTextTask](https://docs.capmonster.cloud/docs/captchas/image-to-text/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
 
 ---
