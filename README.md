@@ -141,6 +141,35 @@ try {
 
 ---
 
+## 🔧 Client Configuration
+
+`ClientOptions` takes named parameters:
+
+| Parameter | Default | Description |
+| :--- | :--- | :--- |
+| `apiKey` | — | **Required.** Your CapMonster Cloud API key from the [Dashboard](https://dash.capmonster.cloud/Account/SignUp?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme). |
+| `serviceUrl` | `https://api.capmonster.cloud` | CapMonster Cloud API endpoint. |
+| `softId` | `57` (`ClientOptions::DEFAULT_SOFT_ID`) | `softId` sent with every created task; identifies your software in the Dashboard. |
+| `clientTimeout` | `20.0` | Timeout in seconds for a single HTTP request to the API. |
+| `clientProxy` | `null` | `ClientProxy` — proxy for the connection to the CapMonster Cloud API itself (`ProxyType`: `http`, `https`, `socks4`, `socks5`; optional login and password). To route a solved task through a proxy, set `ProxyInfo` on the request object instead. |
+| `timeoutsOverride` | `null` | `GetResultTimeouts` that replaces the polling schedule of `solve()`. |
+
+```php
+use CapMonsterCloud\CapMonsterClient;
+use CapMonsterCloud\ClientOptions;
+use CapMonsterCloud\ClientProxy;
+use CapMonsterCloud\ProxyType;
+
+$client = new CapMonsterClient(new ClientOptions(
+    apiKey: 'your_client_key',
+    softId: 12345,
+    clientTimeout: 30.0,
+    clientProxy: new ClientProxy(ProxyType::Http, '127.0.0.1', 8080, 'login', 'password'),
+));
+```
+
+---
+
 ## 🔄 Migrating from 2Captcha or Capsolver
 
 Already use 2Captcha or Capsolver in your PHP scraper or bot? Replace only the solver call and keep the rest of your code unchanged. CapMonster Cloud follows the same flow: send the website URL and sitekey, receive the token.
