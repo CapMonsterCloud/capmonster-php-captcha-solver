@@ -280,6 +280,41 @@ All task types follow the official [CapMonster Cloud API documentation](https://
 
 ---
 
+## 🐞 Error Handling
+
+All exceptions extend `CapMonsterException` (which extends `RuntimeException`). API errors are subclasses of `ApiException` and carry `$method`, `$errorCode` and `$errorDescription`:
+
+| Exception | Meaning |
+| :--- | :--- |
+| `CreateTaskException` | `createTask` was rejected by the API (e.g. `$e->errorCode === 'ERROR_ZERO_BALANCE'`). |
+| `GetResultException` | `getTaskResult` returned an API error while polling. |
+| `GetBalanceException` | `getBalance` was rejected by the API. |
+| `TimeoutException` | The captcha type's maximum waiting time passed before a solution arrived. Carries `$taskId` and `$timeout`. |
+| `ValidationException` | A request object or a `ClientProxy` failed validation. |
+| `UnexpectedHttpStatusException` | The API answered with an unexpected HTTP status. Carries `$method` and `$status`. |
+| `TransportException` | A network error while talking to the API. |
+| `MalformedResponseException` | The API response could not be parsed. |
+
+```php
+use CapMonsterCloud\Exception\ApiException;
+use CapMonsterCloud\Exception\CapMonsterException;
+use CapMonsterCloud\Exception\TimeoutException;
+
+try {
+    $solution = $client->solve($request);
+} catch (TimeoutException $e) {
+    echo 'No solution in time for task ', $e->taskId, PHP_EOL;
+} catch (ApiException $e) {
+    echo 'API error ', $e->errorCode, ': ', $e->errorDescription, PHP_EOL;
+} catch (CapMonsterException $e) {
+    echo $e->getMessage(), PHP_EOL;
+}
+```
+
+**Polling and timeouts.** The client polls `getTaskResult` automatically. Each request type defines its own schedule via `$request->timeouts()` — `firstRequestDelay`, `requestsInterval` and `timeout` in seconds. Replace it for all calls with the `timeoutsOverride` option of `ClientOptions` (see Client Configuration). Unsolved tasks are not charged.
+
+---
+
 ## ⚙️ Best Practices
 
 - **Use tokens promptly:** CAPTCHA tokens expire quickly (a reCAPTCHA v2 token is valid for 60 seconds after solving), so submit or inject the solution immediately after receiving the response.
