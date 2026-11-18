@@ -206,6 +206,42 @@ final class RequestsTest extends TestCase
             ['type' => 'CustomTask', 'class' => 'altcha', 'websiteURL' => $u, 'websiteKey' => '',
                 'metadata' => ['challenge' => 'c', 'iterations' => '1', 'salt' => 's', 'signature' => 'g']],
         ];
+        yield 'fengkongcloud minimal has no metadata' => [
+            new Requests\FengkongCloudCustomTaskRequest($u, 'KEY'),
+            ['type' => 'CustomTask', 'class' => 'fengkongcloud', 'websiteURL' => $u, 'websiteKey' => 'KEY'],
+        ];
+        yield 'fengkongcloud full' => [
+            new Requests\FengkongCloudCustomTaskRequest($u, 'KEY', apiJsUrl: 'https://x/smcp.min.js', userAgent: 'UA'),
+            ['type' => 'CustomTask', 'class' => 'fengkongcloud', 'websiteURL' => $u, 'websiteKey' => 'KEY',
+                'metadata' => ['apiJsUrl' => 'https://x/smcp.min.js'], 'userAgent' => 'UA'],
+        ];
+        yield 'arcaptcha minimal' => [
+            new Requests\ArCaptchaRequest($u, 'KEY'),
+            ['type' => 'ArCaptchaTask', 'websiteURL' => $u, 'websiteKey' => 'KEY'],
+        ];
+        yield 'arcaptcha full' => [
+            new Requests\ArCaptchaRequest($u, 'KEY', isInvisible: true, userAgent: 'UA'),
+            ['type' => 'ArCaptchaTask', 'websiteURL' => $u, 'websiteKey' => 'KEY', 'isInvisible' => true, 'userAgent' => 'UA'],
+        ];
+        yield 'heytap minimal has no metadata' => [
+            new Requests\HeyTapCustomTaskRequest($u, 'KEY'),
+            ['type' => 'CustomTask', 'class' => 'heytap', 'websiteURL' => $u, 'websiteKey' => 'KEY'],
+        ];
+        yield 'heytap full' => [
+            new Requests\HeyTapCustomTaskRequest($u, 'KEY', apiServer: 'api.example.com', userAgent: 'UA'),
+            ['type' => 'CustomTask', 'class' => 'heytap', 'websiteURL' => $u, 'websiteKey' => 'KEY',
+                'metadata' => ['apiServer' => 'api.example.com'], 'userAgent' => 'UA'],
+        ];
+        yield 'proton minimal' => [
+            new Requests\ProtonCustomTaskRequest($u, 'HVT', 'signup', self::proxy()),
+            ['type' => 'CustomTask', 'class' => 'proton', 'websiteURL' => $u,
+                'metadata' => ['HumanVerificationToken' => 'HVT', 'pageAction' => 'signup']] + $p,
+        ];
+        yield 'proton full' => [
+            new Requests\ProtonCustomTaskRequest($u, 'HVT', Requests\ProtonCustomTaskRequest::ACTION_LOGIN, self::proxy(), 'UA'),
+            ['type' => 'CustomTask', 'class' => 'proton', 'websiteURL' => $u,
+                'metadata' => ['HumanVerificationToken' => 'HVT', 'pageAction' => 'login'], 'userAgent' => 'UA'] + $p,
+        ];
     }
 
     #[DataProvider('tasks')]
@@ -251,6 +287,20 @@ final class RequestsTest extends TestCase
         yield 'altcha empty salt' => [fn () => new Requests\AltchaCustomTaskRequest($u, '', 'c', '1', '', 'g'), 'metadata.salt'];
         yield 'alibaba empty prefix' => [fn () => new Requests\AlibabaCustomTaskRequest($u, 'S', ''), 'metadata.prefix'];
         yield 'binance empty validateId' => [fn () => new Requests\BinanceTaskRequest($u, 'login', ''), 'validateId'];
+        yield 'fengkongcloud empty websiteKey' => [fn () => new Requests\FengkongCloudCustomTaskRequest($u, ''), 'websiteKey'];
+        yield 'fengkongcloud empty websiteURL' => [fn () => new Requests\FengkongCloudCustomTaskRequest('', 'K'), 'websiteURL'];
+        yield 'arcaptcha empty websiteKey' => [fn () => new Requests\ArCaptchaRequest($u, ''), 'websiteKey'];
+        yield 'arcaptcha empty websiteURL' => [fn () => new Requests\ArCaptchaRequest('', 'K'), 'websiteURL'];
+        yield 'heytap empty websiteKey' => [fn () => new Requests\HeyTapCustomTaskRequest($u, ''), 'websiteKey'];
+        yield 'heytap empty websiteURL' => [fn () => new Requests\HeyTapCustomTaskRequest('', 'K'), 'websiteURL'];
+        yield 'heytap apiServer with https prefix' => [
+            fn () => new Requests\HeyTapCustomTaskRequest($u, 'K', apiServer: 'https://api.example.com'),
+            'metadata.apiServer',
+        ];
+        yield 'proton empty websiteURL' => [fn () => new Requests\ProtonCustomTaskRequest('', 'T', 'login', self::proxy()), 'websiteURL'];
+        yield 'proton empty HumanVerificationToken' => [fn () => new Requests\ProtonCustomTaskRequest($u, '', 'login', self::proxy()), 'metadata.HumanVerificationToken'];
+        yield 'proton empty pageAction' => [fn () => new Requests\ProtonCustomTaskRequest($u, 'T', '', self::proxy()), 'metadata.pageAction'];
+        yield 'proton unknown pageAction' => [fn () => new Requests\ProtonCustomTaskRequest($u, 'T', 'register', self::proxy()), "'login' or 'signup'"];
     }
 
     /** @param \Closure(): CaptchaRequest $make */
