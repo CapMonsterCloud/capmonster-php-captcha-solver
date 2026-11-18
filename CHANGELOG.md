@@ -3,6 +3,14 @@
 All notable changes to this package are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versions follow [SemVer](https://semver.org/).
 
+## [2.1.0]
+
+### Added
+- `FengkongCloudCustomTaskRequest` (`CustomTask`, class `fengkongcloud`).
+- `ArCaptchaRequest` (`ArCaptchaTask`).
+- `HeyTapCustomTaskRequest` (`CustomTask`, class `heytap`).
+- `ProtonCustomTaskRequest` (`CustomTask`, class `proton`, proxy required).
+
 ## [2.0.1]
 
 ### Added
