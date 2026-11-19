@@ -96,6 +96,28 @@ final class ClientTest extends TestCase
         $this->client()->solve(self::request());
     }
 
+    public function testGetTaskResultExposesCostOfReadyResponse(): void
+    {
+        $this->api->onJson('getTaskResult', [
+            'errorId' => 0,
+            'status' => 'ready',
+            'cost' => 0.0003,
+            'solution' => ['text' => 'abc'],
+        ]);
+
+        $result = $this->client()->getTaskResult(7);
+
+        self::assertTrue($result->isReady);
+        self::assertSame(0.0003, $result->cost);
+    }
+
+    public function testGetTaskResultWithoutCostHasNullCost(): void
+    {
+        $this->api->onJson('getTaskResult', ['errorId' => 0, 'status' => 'ready', 'solution' => ['text' => 'abc']]);
+
+        self::assertNull($this->client()->getTaskResult(7)->cost);
+    }
+
     public function testHttp500And503WhilePollingMeanStillProcessing(): void
     {
         $this->api

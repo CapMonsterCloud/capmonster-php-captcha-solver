@@ -19,7 +19,7 @@ use CapMonsterCloud\Requests\CaptchaRequest;
 final class CapMonsterClient
 {
     /** SDK version, also sent in the User-Agent. Bumped on every release (see CHANGELOG.md). */
-    public const VERSION = '2.1.0';
+    public const VERSION = '2.1.1';
 
     /** HTTP statuses that `getTaskResult` sometimes returns while the task is still being processed. */
     private const PROCESSING_STATUSES = [500, 503];
@@ -105,7 +105,12 @@ final class CapMonsterClient
         }
         $solution = $response['solution'] ?? [];
 
-        return TaskResult::ready(is_array($solution) ? $solution : ['value' => $solution]);
+        $cost = $response['cost'] ?? null;
+
+        return TaskResult::ready(
+            is_array($solution) ? $solution : ['value' => $solution],
+            is_numeric($cost) ? (float) $cost : null,
+        );
     }
 
     /**

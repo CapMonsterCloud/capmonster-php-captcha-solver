@@ -3,6 +3,11 @@
 All notable changes to this package are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versions follow [SemVer](https://semver.org/).
 
+## [2.1.1]
+
+### Added
+- `TaskResult::$cost`: solution cost in USD from the `getTaskResult` response (ready responses only).
+
 ## [2.1.0]
 
 ### Added
