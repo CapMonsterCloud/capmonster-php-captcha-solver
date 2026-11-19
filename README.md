@@ -139,6 +139,8 @@ try {
 }
 ```
 
+The low-level `getTaskResult()` also exposes `TaskResult::$cost` — the price of the solution in USD (ready responses only).
+
 ---
 
 ## 🔧 Client Configuration
