@@ -139,6 +139,37 @@ try {
 }
 ```
 
+The low-level `getTaskResult()` also exposes `TaskResult::$cost` — the price of the solution in USD (ready responses only).
+
+---
+
+## 🔧 Client Configuration
+
+`ClientOptions` takes named parameters:
+
+| Parameter | Default | Description |
+| :--- | :--- | :--- |
+| `apiKey` | — | **Required.** Your CapMonster Cloud API key from the [Dashboard](https://dash.capmonster.cloud/Account/SignUp?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme). |
+| `serviceUrl` | `https://api.capmonster.cloud` | CapMonster Cloud API endpoint. |
+| `softId` | `57` (`ClientOptions::DEFAULT_SOFT_ID`) | `softId` sent with every created task; identifies your software in the Dashboard. |
+| `clientTimeout` | `20.0` | Timeout in seconds for a single HTTP request to the API. |
+| `clientProxy` | `null` | `ClientProxy` — proxy for the connection to the CapMonster Cloud API itself (`ProxyType`: `http`, `https`, `socks4`, `socks5`; optional login and password). To route a solved task through a proxy, set `ProxyInfo` on the request object instead. |
+| `timeoutsOverride` | `null` | `GetResultTimeouts` that replaces the polling schedule of `solve()`. |
+
+```php
+use CapMonsterCloud\CapMonsterClient;
+use CapMonsterCloud\ClientOptions;
+use CapMonsterCloud\ClientProxy;
+use CapMonsterCloud\ProxyType;
+
+$client = new CapMonsterClient(new ClientOptions(
+    apiKey: 'your_client_key',
+    softId: 12345,
+    clientTimeout: 30.0,
+    clientProxy: new ClientProxy(ProxyType::Http, '127.0.0.1', 8080, 'login', 'password'),
+));
+```
+
 ---
 
 ## 🔄 Migrating from 2Captcha or Capsolver
@@ -204,11 +235,29 @@ All task types follow the official [CapMonster Cloud API documentation](https://
 | Captcha type | PHP request classes | Documentation |
 | :--- | :--- | :--- |
 | reCAPTCHA v2 | `RecaptchaV2Request` (optional proxy) | [RecaptchaV2Task](https://docs.capmonster.cloud/docs/captchas/no-captcha-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
-| reCAPTCHA v2 Enterprise | `RecaptchaV2EnterpriseRequest` (optional proxy) | [RecaptchaV2EnterpriseTask](https://docs.capmonster.cloud/docs/captchas/recaptcha-v2-enterprise-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
-| reCAPTCHA v3 | `RecaptchaV3ProxylessRequest` | [RecaptchaV3TaskProxyless](https://docs.capmonster.cloud/docs/captchas/recaptcha-v3-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| reCAPTCHA v2 Enterprise | `RecaptchaV2EnterpriseRequest` (optional proxy, optional `$minScore` 0.1–0.9) | [RecaptchaV2EnterpriseTask](https://docs.capmonster.cloud/docs/captchas/recaptcha-v2-enterprise-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| reCAPTCHA v3 | `RecaptchaV3ProxylessRequest` (optional `$minScore` 0.1–0.9) | [RecaptchaV3TaskProxyless](https://docs.capmonster.cloud/docs/captchas/recaptcha-v3-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| reCAPTCHA v3 Enterprise | `RecaptchaV3EnterpriseRequest` (optional `$minScore` 0.1–0.9) | [RecaptchaV3EnterpriseTask](https://docs.capmonster.cloud/docs/captchas/recaptcha-v3-enterprise-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
 | reCAPTCHA image-click (ComplexImageTask) | `RecaptchaComplexImageTaskRequest` | [ComplexImageTask reCAPTCHA](https://docs.capmonster.cloud/docs/captchas/recaptcha-click/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Dynamic image (ComplexImageTask) | `RecognitionComplexImageTaskRequest` | [ComplexImageTask](https://docs.capmonster.cloud/docs/captchas/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
 | Cloudflare Turnstile | `TurnstileRequest::standard()` and other `TurnstileRequest` factories | [TurnstileTask](https://docs.capmonster.cloud/docs/captchas/turnstile-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
 | GeeTest | `GeetestRequest::v3()`, `GeetestRequest::v4()` | [GeeTestTask](https://docs.capmonster.cloud/docs/captchas/geetest-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| FunCaptcha (Arkose Labs) | `FuncaptchaRequest` | [FunCaptchaTask](https://docs.capmonster.cloud/docs/captchas/funcaptcha-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Amazon AWS WAF | `AmazonWafRequest` | [AmazonTask](https://docs.capmonster.cloud/docs/captchas/amazon-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Binance | `BinanceTaskRequest` | [BinanceTask](https://docs.capmonster.cloud/docs/captchas/binance/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| DataDome | `DataDomeCustomTaskRequest` | [DataDome](https://docs.capmonster.cloud/docs/captchas/datadome/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Imperva (Incapsula) | `ImpervaCustomTaskRequest` | [Imperva](https://docs.capmonster.cloud/docs/captchas/incapsula/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| TSPD | `TspdCustomTaskRequest` | [TSPD](https://docs.capmonster.cloud/docs/captchas/tspd-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| TenDI (Tencent) | `TenDiCustomTaskRequest` | [TenDI](https://docs.capmonster.cloud/docs/captchas/tendi/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Basilisk | `BasiliskCustomTaskRequest` | [BasiliskTask](https://docs.capmonster.cloud/docs/captchas/Basilisk-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Alibaba | `AlibabaCustomTaskRequest` | [Alibaba](https://docs.capmonster.cloud/docs/captchas/alibaba-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Altcha | `AltchaCustomTaskRequest` | [Altcha](https://docs.capmonster.cloud/docs/captchas/altcha-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Friendly Captcha | `FriendlyCustomTaskRequest` | [Friendly](https://docs.capmonster.cloud/docs/captchas/friendly-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Hunt | `HuntCustomTaskRequest` | [Hunt](https://docs.capmonster.cloud/docs/captchas/hunt-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| FengkongCloud, ARCaptcha, HeyTap and Proton | `FengkongCloudCustomTaskRequest`, `ArCaptchaRequest`, `HeyTapCustomTaskRequest`, `ProtonCustomTaskRequest` | [FengkongCloud](https://docs.capmonster.cloud/docs/captchas/fengkongcloud-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme), [ARCaptcha](https://docs.capmonster.cloud/docs/captchas/arcaptcha-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme), [HeyTap](https://docs.capmonster.cloud/docs/captchas/heytap-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme), [Proton](https://docs.capmonster.cloud/docs/captchas/proton-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| MTCaptcha | `MtCaptchaRequest` | [MTCaptcha](https://docs.capmonster.cloud/docs/captchas/mtcaptcha-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Prosopo | `ProsopoTaskRequest` | [Prosopo](https://docs.capmonster.cloud/docs/captchas/prosopo-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
+| Yidun (NECaptcha) | `YidunRequest` | [Yidun](https://docs.capmonster.cloud/docs/captchas/yidun-task/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
 | Text captcha (image to text) | `ImageToTextRequest` | [ImageToTextTask](https://docs.capmonster.cloud/docs/captchas/image-to-text/?utm_source=github&utm_medium=referral&utm_campaign=php_repo_readme) |
 
 ---
@@ -230,6 +279,41 @@ All task types follow the official [CapMonster Cloud API documentation](https://
          ▼
 [ Receive Token & Autosubmit ] ──► Complete bypass
 ```
+
+---
+
+## 🐞 Error Handling
+
+All exceptions extend `CapMonsterException` (which extends `RuntimeException`). API errors are subclasses of `ApiException` and carry `$method`, `$errorCode` and `$errorDescription`:
+
+| Exception | Meaning |
+| :--- | :--- |
+| `CreateTaskException` | `createTask` was rejected by the API (e.g. `$e->errorCode === 'ERROR_ZERO_BALANCE'`). |
+| `GetResultException` | `getTaskResult` returned an API error while polling. |
+| `GetBalanceException` | `getBalance` was rejected by the API. |
+| `TimeoutException` | The captcha type's maximum waiting time passed before a solution arrived. Carries `$taskId` and `$timeout`. |
+| `ValidationException` | A request object or a `ClientProxy` failed validation. |
+| `UnexpectedHttpStatusException` | The API answered with an unexpected HTTP status. Carries `$method` and `$status`. |
+| `TransportException` | A network error while talking to the API. |
+| `MalformedResponseException` | The API response could not be parsed. |
+
+```php
+use CapMonsterCloud\Exception\ApiException;
+use CapMonsterCloud\Exception\CapMonsterException;
+use CapMonsterCloud\Exception\TimeoutException;
+
+try {
+    $solution = $client->solve($request);
+} catch (TimeoutException $e) {
+    echo 'No solution in time for task ', $e->taskId, PHP_EOL;
+} catch (ApiException $e) {
+    echo 'API error ', $e->errorCode, ': ', $e->errorDescription, PHP_EOL;
+} catch (CapMonsterException $e) {
+    echo $e->getMessage(), PHP_EOL;
+}
+```
+
+**Polling and timeouts.** The client polls `getTaskResult` automatically. Each request type defines its own schedule via `$request->timeouts()` — `firstRequestDelay`, `requestsInterval` and `timeout` in seconds. Replace it for all calls with the `timeoutsOverride` option of `ClientOptions` (see Client Configuration). Unsolved tasks are not charged.
 
 ---
 
