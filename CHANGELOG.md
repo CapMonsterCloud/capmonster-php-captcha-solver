@@ -3,6 +3,11 @@
 All notable changes to this package are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versions follow [SemVer](https://semver.org/).
 
+## [2.1.2]
+
+### Changed
+- Composer package description and keywords now list the full range of supported captcha types.
+
 ## [2.1.1]
 
 ### Added
