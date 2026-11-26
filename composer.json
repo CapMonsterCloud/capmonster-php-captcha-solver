@@ -1,9 +1,9 @@
 {
     "name": "capmonstercloud/capmonster-client",
-    "description": "PHP client for the CapMonster Cloud captcha-solving API",
+    "description": "Official CapMonster Cloud PHP SDK: captcha solver & captcha bypass for reCAPTCHA v2/v3/Enterprise, Cloudflare Turnstile, DataDome, GeeTest, Amazon WAF, FunCaptcha and 20+ captcha types. A 2captcha and capsolver alternative.",
     "type": "library",
     "license": "MIT",
-    "keywords": ["captcha", "capmonster", "recaptcha", "turnstile", "captcha-solver"],
+    "keywords": ["captcha", "capmonster", "captcha-solver", "captcha-bypass", "recaptcha", "turnstile", "geetest", "datadome", "amazon-waf", "funcaptcha", "2captcha-alternative", "capsolver-alternative"],
     "homepage": "https://capmonster.cloud",
     "support": {
         "docs": "https://docs.capmonster.cloud",
